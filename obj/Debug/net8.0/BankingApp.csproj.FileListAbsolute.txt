@@ -1,0 +1,15 @@
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/bin/Debug/net8.0/BankingApp
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/bin/Debug/net8.0/BankingApp.deps.json
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/bin/Debug/net8.0/BankingApp.runtimeconfig.json
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/bin/Debug/net8.0/BankingApp.dll
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/bin/Debug/net8.0/BankingApp.pdb
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/obj/Debug/net8.0/BankingApp.GeneratedMSBuildEditorConfig.editorconfig
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/obj/Debug/net8.0/BankingApp.AssemblyInfoInputs.cache
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/obj/Debug/net8.0/BankingApp.AssemblyInfo.cs
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/obj/Debug/net8.0/BankingApp.csproj.CoreCompileInputs.cache
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/obj/Debug/net8.0/BankingApp.sourcelink.json
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/obj/Debug/net8.0/BankingApp.dll
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/obj/Debug/net8.0/refint/BankingApp.dll
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/obj/Debug/net8.0/BankingApp.pdb
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/obj/Debug/net8.0/BankingApp.genruntimeconfig.cache
+/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/obj/Debug/net8.0/ref/BankingApp.dll
