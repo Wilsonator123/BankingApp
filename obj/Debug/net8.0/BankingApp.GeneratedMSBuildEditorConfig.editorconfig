@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BankingApp
-build_property.ProjectDir = /Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/
+build_property.ProjectDir = /home/zed/code/work/rs_train/csharp_projects/BankingApp/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

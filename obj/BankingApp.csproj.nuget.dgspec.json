@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/BankingApp.csproj": {}
+    "/home/zed/code/work/rs_train/csharp_projects/BankingApp/BankingApp.csproj": {}
   },
   "projects": {
-    "/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/BankingApp.csproj": {
+    "/home/zed/code/work/rs_train/csharp_projects/BankingApp/BankingApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/BankingApp.csproj",
+        "projectUniqueName": "/home/zed/code/work/rs_train/csharp_projects/BankingApp/BankingApp.csproj",
         "projectName": "BankingApp",
-        "projectPath": "/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/BankingApp.csproj",
-        "packagesPath": "/Users/josephaguele/.nuget/packages/",
-        "outputPath": "/Users/josephaguele/Projects/BankingApp/BankingApp/BankingApp/obj/",
+        "projectPath": "/home/zed/code/work/rs_train/csharp_projects/BankingApp/BankingApp.csproj",
+        "packagesPath": "/home/zed/.nuget/packages/",
+        "outputPath": "/home/zed/code/work/rs_train/csharp_projects/BankingApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/josephaguele/.nuget/NuGet/NuGet.Config"
+          "/home/zed/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -33,11 +32,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -59,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.107/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
