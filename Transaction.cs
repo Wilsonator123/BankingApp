@@ -15,5 +15,15 @@ public class Transaction
 
     public string TransactionType { get; set; } = "";
     public DateTime TransactionDate { get; set; }
+
+    public virtual void ShowTransactionDetails()
+    {
+        Console.WriteLine($"""
+                          TransactionID: {TransactionID}
+                          TransactionType: {TransactionType}
+                          TransactionDate: {TransactionDate}
+                          """);
+    }
+
 }
 
