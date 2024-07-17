@@ -6,6 +6,7 @@ public class Transaction
     public Guid TransactionId { get; }
     public string TransactionType { get; set; }
     public DateTime TransactionDate { get; set; }
+    public decimal TransactionAmount { get; set; }
 
     public Transaction(string transactionType, DateTime transactionDate)
     {
@@ -15,11 +16,14 @@ public class Transaction
         TransactionDate = transactionDate;
     }
 
-    public Transaction(string transactionType)
+    // for withdrawals and deposits
+    public Transaction(string transactionType, decimal transactionAmount)
     {
         TransactionId = Guid.NewGuid();
         TransactionType = transactionType;
         TransactionDate = DateTime.Now;
+        TransactionAmount = transactionAmount;
+
     }
 
  
@@ -31,6 +35,17 @@ public class Transaction
                           Type: {TransactionType}
                           Creation Date: {DateHelper.DateToString(TransactionDate)}
                           """);
+
+        // could make a switch statement for each transaction type
+        switch (TransactionType.ToLower())
+        {
+            case "withdrawal":
+                Console.WriteLine($"Amount Withdrawn: {TransactionAmount}");
+                break;
+            case "deposit":
+                Console.WriteLine($"Amount Deposited: {TransactionAmount}");
+                break;
+        }
     }
 
 }
