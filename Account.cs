@@ -25,9 +25,27 @@ public abstract class Account
       return true;  
     }
 
-    public bool Withdraw (decimal amount){
+    public bool Withdraw(decimal amount)
+    {
+        if (AccountBalance < 0)
+        {
+            return false;
+        }
+
+        if (amount < 0)
+        {
+            Console.WriteLine("Invalid input: Amount must be greater than 0");
+            return false;
+        }
+
+        if (amount > AccountBalance)
+        {
+            Console.WriteLine("Invalid input: Cannot withdraw more than the balance in the account");
+            return false;
+        }
+
         AccountBalance -= amount;
-      return true;  
+        return true;
     }
 
     public void DisplayBalance (){
