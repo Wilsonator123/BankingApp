@@ -15,17 +15,18 @@ public class DataParser
     /// <param name="filePath">absolute or relative path to the csv file</param>
     /// <returns>
     /// A list of dictionaries, each dictionary contains a
-    /// list of key(atrribute name), value(attribute value) pairs 
+    /// list of key-value pairs where each key is a account attribute name,
+    /// and the value is the attribute value 
     /// </returns>
     public static List<Dictionary<string, string>> ReadDataFromCSV(string filePath)
     {
-        List<Dictionary<string, string>> userInfoList = new(); 
+        List<Dictionary<string, string>> accountInfoList = new(); 
         string[] attributes = [];
         try
         {
             StreamReader sr = new StreamReader(filePath);
             // A line (except the first one) should be a list of comma
-            // seperated values of attributes for a single account holder
+            // seperated values of attributes for a single account
             // e.g. accountName1, acocuntNumber1, accountBalance1 ... 
             string line;
             int lineCount = 0;
@@ -39,13 +40,13 @@ public class DataParser
                 }
                 else
                 {
-                    Dictionary<string, string> userInfo = new();
+                    Dictionary<string, string> accountInfo = new();
                     for (int i = 0; i < fields.Length; i++)
                     {
-                        userInfo.Add(attributes[i].Trim(),fields[i].Trim());                        
+                        accountInfo.Add(attributes[i].Trim(),fields[i].Trim());                        
                     }
 
-                    userInfoList.Add(userInfo);
+                    accountInfoList.Add(accountInfo);
                 }
 
                 lineCount++;
@@ -56,6 +57,9 @@ public class DataParser
             Console.WriteLine("The file could not be read:");
             Console.WriteLine(e.Message);
         }
-        return userInfoList;
-    } 
+        return accountInfoList;
+    }
+
+    
+   
 }
