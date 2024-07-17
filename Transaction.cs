@@ -2,26 +2,34 @@
 
 public class Transaction
 {
-    public Transaction(Guid transactionId, string transactionType, DateTime transactionDate)
+    // could throw exceptions on null arguments
+    public Guid TransactionId { get; }
+    public string TransactionType { get; set; }
+    public DateTime TransactionDate { get; set; }
+
+    public Transaction(string transactionType, DateTime transactionDate)
     {
         // could throw exceptions on null arguments
-        TransactionID = transactionId;
+        TransactionId = Guid.NewGuid();
         TransactionType = transactionType;
         TransactionDate = transactionDate;
     }
 
-    // could throw exceptions on null arguments
-    public Guid TransactionID { get; set; }
+    public Transaction(string transactionType)
+    {
+        TransactionId = Guid.NewGuid();
+        TransactionType = transactionType;
+        TransactionDate = DateTime.Now;
+    }
 
-    public string TransactionType { get; set; } = "";
-    public DateTime TransactionDate { get; set; }
+ 
 
     public virtual void ShowTransactionDetails()
     {
         Console.WriteLine($"""
-                          TransactionID: {TransactionID}
+                          TransactionID: {TransactionId}
                           TransactionType: {TransactionType}
-                          TransactionDate: {TransactionDate}
+                          TransactionDate: {DateHelper.DateToString(TransactionDate)}
                           """);
     }
 
