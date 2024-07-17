@@ -20,7 +20,7 @@ public abstract class Account
 
     public string CreationDate { get => _creationDate; set => _creationDate = value; }
 
-    public bool Deposit (decimal amount){
+    public virtual bool Deposit (decimal amount){
         AccountBalance += amount;
       return true;  
     }
