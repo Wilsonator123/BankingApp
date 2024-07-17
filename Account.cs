@@ -18,6 +18,8 @@ public abstract class Account
     public int AccountNumber { get => _accountNumber; }
     public decimal AccountBalance { get => _accountBalance; set => _accountBalance = value; }
 
+    public string CreationDate { get => _creationDate; set => _creationDate = value; }
+
     public bool Deposit (decimal amount){
         AccountBalance += amount;
       return true;  
