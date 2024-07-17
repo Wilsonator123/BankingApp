@@ -43,7 +43,7 @@ namespace BankingApp
         }
 
         // Should a name be able to change?
-        public string Name { get => _name; set => _name = value; }
+        public string Name { get => _name; }
         public int PhotoId { get => _photoId; set => _photoId = value; }
         public int AddressId { get => _addressId; set => _addressId = value; }
         
@@ -85,6 +85,11 @@ namespace BankingApp
             {
                 Console.WriteLine("You already have a business account");
             }
+        }
+
+        public void CloseBusinessAccount()
+        {
+            if (_businessAccounts != null) _businessAccounts = null;
         }
 
         public void OpenIsaAccount()
