@@ -24,12 +24,12 @@ public class Transaction
 
  
 
-    public virtual void ShowTransactionDetails()
+    public virtual void ShowDetails()
     {
         Console.WriteLine($"""
-                          TransactionID: {TransactionId}
-                          TransactionType: {TransactionType}
-                          TransactionDate: {DateHelper.DateToString(TransactionDate)}
+                          Transaction ID: {TransactionId}
+                          Type: {TransactionType}
+                          Creation Date: {DateHelper.DateToString(TransactionDate)}
                           """);
     }
 
