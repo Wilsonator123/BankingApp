@@ -1,3 +1,5 @@
+using BankingApp;
+
 public abstract class Account
 {
 
@@ -5,6 +7,8 @@ public abstract class Account
     private int _accountNumber = 0;
     private decimal _accountBalance = 0;
     private string _creationDate = "";
+    // transaction list could be initialised from a file
+    private List<Transaction> _transactions = [];
 
     public Account(string accountName, int accountNumber, decimal accountBalance, string creationDate)
     {
@@ -19,9 +23,11 @@ public abstract class Account
     public decimal AccountBalance { get => _accountBalance; set => _accountBalance = value; }
 
     public string CreationDate { get => _creationDate; set => _creationDate = value; }
+    public List<Transaction> Transactions { get => _transactions; }
 
     public virtual bool Deposit (decimal amount){
         AccountBalance += amount;
+        Transactions.Add(new Transaction("deposit", amount));
       return true;  
     }
 
@@ -45,7 +51,17 @@ public abstract class Account
         }
 
         AccountBalance -= amount;
+        Transactions.Add(new Transaction("withdrawal", amount));
+
         return true;
+    }
+
+    public void DisplayAccountTransactions()
+    {
+        foreach (var transaction in Transactions)
+        {
+            transaction.ShowDetails();
+        }
     }
 
     public void DisplayBalance (){
