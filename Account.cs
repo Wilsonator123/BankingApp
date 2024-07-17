@@ -32,7 +32,7 @@ public abstract class Account
             return false;
         }
 
-        if (amount < 0)
+        if (amount <= 0)
         {
             Console.WriteLine("Invalid input: Amount must be greater than 0");
             return false;
