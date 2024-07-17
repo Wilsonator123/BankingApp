@@ -32,7 +32,7 @@ public abstract class Account
         Console.WriteLine($"{AccountBalance:C2}");
     }
 
-    public void DisplayAccountInformation(){
+    public virtual void DisplayAccountInformation(){
         Console.WriteLine($"""
         Account Name : {_accountName}
         Account Number: {_accountNumber}
