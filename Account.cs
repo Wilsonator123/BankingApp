@@ -18,21 +18,41 @@ public abstract class Account
     public int AccountNumber { get => _accountNumber; }
     public decimal AccountBalance { get => _accountBalance; set => _accountBalance = value; }
 
+    public string CreationDate { get => _creationDate; set => _creationDate = value; }
+
     public bool Deposit (decimal amount){
         AccountBalance += amount;
       return true;  
     }
 
-    public bool Withdraw (decimal amount){
+    public bool Withdraw(decimal amount)
+    {
+        if (AccountBalance < 0)
+        {
+            return false;
+        }
+
+        if (amount <= 0)
+        {
+            Console.WriteLine("Invalid input: Amount must be greater than 0");
+            return false;
+        }
+
+        if (amount > AccountBalance)
+        {
+            Console.WriteLine("Invalid input: Cannot withdraw more than the balance in the account");
+            return false;
+        }
+
         AccountBalance -= amount;
-      return true;  
+        return true;
     }
 
     public void DisplayBalance (){
         Console.WriteLine($"{AccountBalance:C2}");
     }
 
-    public void DisplayAccountInformation(){
+    public virtual void DisplayAccountInformation(){
         Console.WriteLine($"""
         Account Name : {_accountName}
         Account Number: {_accountNumber}
