@@ -10,11 +10,13 @@ namespace BankingApp
 {
     internal class Customer
     {
-        private string _name;
+        private readonly Guid _id;
+        private readonly string _firstName;
+        private readonly string _lastName;
         private int _photoId;
         private int _addressId;
-        private DateTime _dateOfBirth;
-
+        private readonly DateTime _dateOfBirth;
+        
         // Can have multiple personal accounts but one business / isa
         //TODO : Create Personal Account Class
         private List<int> _personalAccounts = [];
@@ -24,13 +26,20 @@ namespace BankingApp
 
         //TODO : Create ISA Account Class (This type will be ISA)
         private int? _isaAccount = null;
+        
+        // TODO : Create list of transactions could be a file instead!
+        // Transactions/<id>(.txt / .csv)
+        private string transactionPath;
 
 
-        public Customer(string name, int photoId, int addressId, string dateOfBirth)
+        public Customer(string firstName, string lastName, int photoId, int addressId, string dateOfBirth)
         {
             try
             {
-                _name = name;
+                // Probably want a way to verify its unique (it's very unlikely tho)
+                _id = new Guid();
+                _firstName = firstName;
+                _lastName = lastName;
                 // TODO : We should validate the IDs presented (basic regex will do)
                 _photoId = photoId;
                 _addressId = addressId;
@@ -42,13 +51,18 @@ namespace BankingApp
             }
         }
 
-        // Should a name be able to change?
-        public string Name { get => _name; }
+        
         public int PhotoId { get => _photoId; set => _photoId = value; }
         public int AddressId { get => _addressId; set => _addressId = value; }
         
         // DoB shouldn't change
         public DateTime DateOfBirth { get => _dateOfBirth; }
+
+        public string FirstName => _firstName;
+
+        public string LastName => _lastName;
+
+        public Guid Id => _id;
 
         public bool AddPersonalAccount(int accountNumber)
         {
@@ -67,7 +81,7 @@ namespace BankingApp
             // TODO : Display all customer information
             return $"""
                     
-                                Name : {_name}
+                                Name : {FirstName} {LastName}
                                 Date of Birth : {DateHelper.DateToString(_dateOfBirth)}
                                 Accounts: {_personalAccounts.Count}
                                 
@@ -78,7 +92,7 @@ namespace BankingApp
         {
             if (_businessAccounts == null)
             {
-                // TODO : Create BusniessAccount object
+                // TODO : Create BusinessAccount object
                 // _businessAccount = new BusinessAccount();
             }
             else
@@ -89,7 +103,9 @@ namespace BankingApp
 
         public void CloseBusinessAccount()
         {
+            // If account has a balance or debt can it close?
             if (_businessAccounts != null) _businessAccounts = null;
+            Console.WriteLine("Business Account Closed");
         }
 
         public void OpenIsaAccount()
@@ -101,9 +117,16 @@ namespace BankingApp
             }
         }
 
+        public void CloseIsaAccount()
+        {
+            // What to do with money inside
+            if (_isaAccount != null) _isaAccount = null;
+            Console.WriteLine("ISA Account Closed");
+        }
+
         public static void Main()
         {
-            Customer cus = new Customer("George Wilson", 100, 100, "24/01/2003");
+            Customer cus = new Customer("George", "Wilson", 100, 100, "24/01/2003");
             Console.WriteLine(cus.ToString());
         }
     }

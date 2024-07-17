@@ -12,7 +12,7 @@ The remaining 12 characters are randomly generated and unique to each licence ho
 https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex?view=net-8.0
 */
 
-public class ValidateId
+public static class ValidateId
 {
     
 }
