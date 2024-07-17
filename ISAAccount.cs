@@ -18,7 +18,7 @@
      otherwise, 
      allotted balance = 20000
     */
-    public bool Deposit(decimal amount)
+    public override bool Deposit(decimal amount)
     {
 
 
