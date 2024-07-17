@@ -123,11 +123,5 @@ namespace BankingApp
             if (_isaAccount != null) _isaAccount = null;
             Console.WriteLine("ISA Account Closed");
         }
-
-        public static void Main()
-        {
-            Customer cus = new Customer("George", "Wilson", 100, 100, "24/01/2003");
-            Console.WriteLine(cus.ToString());
-        }
     }
 }
