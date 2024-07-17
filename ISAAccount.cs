@@ -8,28 +8,6 @@
         : base(accountName, accountNumber, accountBalance, creationDate)
     { }
 
-    public bool Withdraw(decimal amount)
-    {
-        if (AccountBalance < 0)
-        {
-            return false;
-        }
-
-        if (amount < 0)
-        {
-            Console.WriteLine("Invalid input: Amount must be greater than 0");
-            return false;
-        }
-
-        if (amount > AccountBalance)
-        {
-            Console.WriteLine("Invalid input: Cannot withdraw more than the balance in the account");
-            return false;
-        }
-
-        AccountBalance -= amount;
-        return true;
-    }
 
 
     /* check tax year for specific deposit transaction using its associated date
@@ -61,11 +39,6 @@
         return true;
     }
 
-
-    public void DisplayBalance()
-    {
-        Console.WriteLine(AccountBalance);
-    }
 
     private DateTime GetTaxYear(DateTime date)
     {
