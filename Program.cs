@@ -13,11 +13,14 @@ public class Program
             Console.Write("Password: ");
             string? tellerPassword = Console.ReadLine();
 
-            if (tellerName == "Test" && tellerPassword == "Pass") validAccount = true;
+            if (tellerName == "Test" && tellerPassword == "Pass")
+            {
+                Console.WriteLine($"Welcome {tellerName}!");
+                validAccount = true;
+            }
             else Console.WriteLine("Incorrect Username or Password");
         } while (!validAccount);
 
-        Console.WriteLine("Welcome Username!");
     }
 
     public static bool MainMenu()
