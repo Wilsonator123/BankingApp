@@ -6,14 +6,17 @@ using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankingApp
-{
+namespace BankingApp;
+
+public enum IdType { Passport = 1, DriversLicense = 2, NationalId = 3 } 
+
     internal class Customer
     {
         private readonly Guid _id;
         private readonly string _firstName;
         private readonly string _lastName;
-        private int _photoId;
+        private IdType _photoIdType;
+        private string _photoId;
         private int _addressId;
         private readonly DateTime _dateOfBirth;
         
@@ -32,7 +35,7 @@ namespace BankingApp
         private string transactionPath;
 
 
-        public Customer(string firstName, string lastName, int photoId, int addressId, string dateOfBirth)
+        public Customer(string firstName, string lastName, int photoIdType, string photoId, int addressId, string dateOfBirth)
         {
             try
             {
@@ -41,6 +44,7 @@ namespace BankingApp
                 _firstName = firstName;
                 _lastName = lastName;
                 // TODO : We should validate the IDs presented (basic regex will do)
+                _photoIdType = (IdType) photoIdType;
                 _photoId = photoId;
                 _addressId = addressId;
                 _dateOfBirth = DateTime.ParseExact(dateOfBirth, "dd/MM/yyyy", new CultureInfo("en-GB"));
@@ -52,7 +56,7 @@ namespace BankingApp
         }
 
         
-        public int PhotoId { get => _photoId; set => _photoId = value; }
+        public string PhotoId { get => _photoId; set => _photoId = value; }
         public int AddressId { get => _addressId; set => _addressId = value; }
         
         // DoB shouldn't change
@@ -124,4 +128,3 @@ namespace BankingApp
             Console.WriteLine("ISA Account Closed");
         }
     }
-}
