@@ -4,7 +4,7 @@
     private decimal _allottedBalance = 20000;
 
 
-    public ISAAccount(string accountName, int accountNumber, decimal accountBalance, string creationDate)
+    public ISAAccount(string accountName, string accountNumber, decimal accountBalance, string creationDate)
         : base(accountName, accountNumber, accountBalance, creationDate)
     { }
 
