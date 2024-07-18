@@ -42,9 +42,11 @@ public class Program
             switch (choice)
             {
                 case "1":
+                    Console.Clear();
                     break;
                 case "2":
                     CreateCustomer();
+                    Console.Clear();
                     break;
                 
             }
@@ -56,6 +58,8 @@ public class Program
 
     public static void CreateCustomer()
     {
+        Console.Clear();
+        Console.WriteLine("\t **** Create a new Customer Account ****");
         Console.WriteLine("Please enter the following details");
         Console.Write("First Name: ");
         string? firstName = Console.ReadLine();
@@ -75,7 +79,7 @@ public class Program
 
         Console.Write("Enter date of birth (dd/mm/yyy): ");
         string? dateOfBirth = Console.ReadLine();
-        while (!Regex.IsMatch(dateOfBirth, "^[0-3][0-9]\\/[0-1][1-9]\\/(?:19|20)[0-9][0-9]"))
+        while (!Regex.IsMatch(dateOfBirth, @"^[0-3][0-9]\/[0-1][1-9]\/(?:19|20)[0-9][0-9]"))
         {
             Console.WriteLine("Invalid Format (dd/mm/yyyy)");
             Console.Write("Enter a valid date: ");
@@ -122,7 +126,7 @@ public class Program
         Console.WriteLine("Please login to your account:");
         Authorize();
 
-        while (MainMenu());
+        while (MainMenu()) ;
 
     }
 }
