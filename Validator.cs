@@ -40,17 +40,11 @@ public static class Validator
         licenseBuilder.Append(customer.FirstName[0]);
         licenseBuilder.Append("[A-Z|9][A-Z0-9]{3}");
         
-        if (Regex.IsMatch(driversLicense, licenseBuilder.ToString()))
-        {
-            Console.WriteLine("Valid drivers license");
-        }
-        else
+        if (!Regex.IsMatch(driversLicense, licenseBuilder.ToString()))
         {
             Console.WriteLine("Invalid drivers license");
             return false;
         }
-        
-        Console.WriteLine(licenseBuilder);
 
         return true;
     }
