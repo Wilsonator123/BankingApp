@@ -3,8 +3,8 @@
 public class ISAAccount : Account
 {
     private const decimal InterestRate = 0.0275m;
-    private const decimal MaxAllotedBalance = 20000.00m;
-    private decimal _allottedBalance = MaxAllotedBalance;
+    private const decimal MaxAllottedBalance = 20000.00m;
+    private decimal _allottedBalance = MaxAllottedBalance;
 
 
     public ISAAccount(string accountName, string accountNumber, decimal accountBalance, string creationDate)
@@ -13,14 +13,7 @@ public class ISAAccount : Account
 
 
 
-    /* check tax year for specific deposit transaction using its associated date
-     if current deposit transaction's tax year is the same,  
-        if (allotted balance - amount) > 0,
-          allotted balance -= amount
-          current balance += current balance + amount
-     otherwise, 
-     allotted balance = 20000
-    */
+
     public override bool Deposit(decimal amount)
     {
         if (amount <= 0)
@@ -49,13 +42,16 @@ public class ISAAccount : Account
         return true;
     }
 
+
+    // looks through each deposit and determines if there
+    // is enough of an allotted balance to allow a deposit 
     private bool CanDeposit(decimal amount)
     {
         // look through transaction list
-        // check the latest one with deposit
-        // look at every deposit within tax year -- IGNORE
-        // retrieve each amount deposited and deduct from allottedBalance -- IGNORE
+        // look at every deposit within tax year 
+        // retrieve each amount deposited and deduct from allottedBalance
         // retrieve the date 
+
         DateTime currentTaxYear = GetTaxYear(DateTime.Now);
 
         List<Transaction?> depositsThisTaxYear =
@@ -65,22 +61,12 @@ public class ISAAccount : Account
 
         decimal totalDepositThisTaxYear = depositsThisTaxYear.Sum(d => d.TransactionAmount);
 
-        if (amount > (MaxAllotedBalance - totalDepositThisTaxYear))
+        if (amount > (MaxAllottedBalance - totalDepositThisTaxYear))
         {
             Console.WriteLine($"Cannot deposit more than allotted balance: { _allottedBalance: C2}");
             return false;
         }
 
-        Transaction? latestDeposit = depositsThisTaxYear[depositsThisTaxYear.Count - 1] ?? null;
-
-
-        DateTime latestDepositTaxYear = GetTaxYear(latestDeposit.TransactionDate);
-        // no previous deposit therefore allotted balance stays 20000
-        if (latestDeposit == null || (latestDepositTaxYear != currentTaxYear))
-        {
-
-            _allottedBalance = MaxAllotedBalance;
-        }
 
         return true;
     }
