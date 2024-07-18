@@ -4,13 +4,13 @@ public abstract class Account
 {
 
     private string _accountName = "";
-    private int _accountNumber = 0;
+    private string _accountNumber = "";
     private decimal _accountBalance = 0;
     private string _creationDate = "";
     // transaction list could be initialised from a file
     private List<Transaction> _transactions = [];
 
-    public Account(string accountName, int accountNumber, decimal accountBalance, string creationDate)
+    public Account(string accountName, string accountNumber, decimal accountBalance, string creationDate)
     {
         _accountName = accountName;
         _accountNumber = accountNumber;
@@ -19,16 +19,17 @@ public abstract class Account
     }
 
     public string AccountName { get => _accountName; set => _accountName = value; }
-    public int AccountNumber { get => _accountNumber; }
+    public string AccountNumber { get => _accountNumber; }
     public decimal AccountBalance { get => _accountBalance; set => _accountBalance = value; }
 
     public string CreationDate { get => _creationDate; set => _creationDate = value; }
     public List<Transaction> Transactions { get => _transactions; }
 
-    public virtual bool Deposit (decimal amount){
+    public virtual bool Deposit(decimal amount)
+    {
         AccountBalance += amount;
         Transactions.Add(new Transaction("deposit", amount));
-      return true;  
+        return true;
     }
 
     public bool Withdraw(decimal amount)
@@ -64,11 +65,13 @@ public abstract class Account
         }
     }
 
-    public void DisplayBalance (){
+    public void DisplayBalance()
+    {
         Console.WriteLine($"{AccountBalance:C2}");
     }
 
-    public virtual void DisplayAccountInformation(){
+    public virtual void DisplayAccountInformation()
+    {
         Console.WriteLine($"""
         Account Name : {_accountName}
         Account Number: {_accountNumber}
@@ -76,5 +79,5 @@ public abstract class Account
         Date of Creation : {_creationDate}
         """);
     }
-    
+
 }
