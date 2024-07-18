@@ -12,8 +12,6 @@ public class ISAAccount : Account
     { }
 
 
-
-
     public override bool Deposit(decimal amount)
     {
         if (amount <= 0)
@@ -42,7 +40,6 @@ public class ISAAccount : Account
         return true;
     }
 
-
     // looks through each deposit and determines if there
     // is enough of an allotted balance to allow a deposit 
     private bool CanDeposit(decimal amount)
@@ -67,11 +64,8 @@ public class ISAAccount : Account
             return false;
         }
 
-
         return true;
     }
-
-
 
     // tax year = 1st April - 31st March
     // IF transaction's month is after april
