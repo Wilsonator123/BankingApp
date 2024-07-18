@@ -8,7 +8,7 @@ public class Program
         // businessAccount.DisplayAccountInformation();
         Customer cus = new Customer("George", "Wilson", 100, 100, "24/01/2003");
         Console.WriteLine(cus.ToString());
-        Validator.ValidateDriversLicense(cus, "1234567891234567");
+        Validator.ValidateDriversLicense(cus, "WILSO001243G99KT");
 
         // Test transaction list
         //businessAccount.DisplayBalance();
