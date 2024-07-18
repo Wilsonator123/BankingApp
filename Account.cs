@@ -8,7 +8,7 @@ public abstract class Account
     private decimal _accountBalance = 0;
     private string _creationDate = "";
     // transaction list could be initialised from a file
-    private List<Transaction> _transactions = [];
+    private List<Transaction?> _transactions = [];
 
     public Account(string accountName, string accountNumber, decimal accountBalance, string creationDate)
     {
@@ -23,7 +23,7 @@ public abstract class Account
     public decimal AccountBalance { get => _accountBalance; set => _accountBalance = value; }
 
     public string CreationDate { get => _creationDate; set => _creationDate = value; }
-    public List<Transaction> Transactions { get => _transactions; }
+    public List<Transaction?> Transactions { get => _transactions; }
 
     public virtual bool Deposit(decimal amount)
     {
