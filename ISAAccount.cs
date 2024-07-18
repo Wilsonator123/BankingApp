@@ -61,7 +61,7 @@ public class ISAAccount : Account
 
         decimal totalDepositThisTaxYear = depositsThisTaxYear.Sum(d => d.TransactionAmount);
 
-        if (amount > (MaxAllottedBalance - totalDepositThisTaxYear))
+        if (totalDepositThisTaxYear + amount  > MaxAllottedBalance)
         {
             Console.WriteLine($"Cannot deposit more than allotted balance: { _allottedBalance: C2}");
             return false;
