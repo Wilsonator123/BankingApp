@@ -9,7 +9,7 @@ public static class Validator
     public static bool ValidateDriversLicense(Customer customer, string driversLicense)
     {
         StringBuilder licenseBuilder = new StringBuilder();
-        if(driversLicense.Length != 18)
+        if(driversLicense.Length != 16)
         {
             Console.WriteLine("Invalid drivers license");
             return false;
@@ -38,7 +38,7 @@ public static class Validator
 
         licenseBuilder.Append(licenseNumbers);
         licenseBuilder.Append(customer.FirstName[0]);
-        licenseBuilder.Append("[A-Z|9][A-Z0-9]{3}[0-9]{2}");
+        licenseBuilder.Append("[A-Z|9][A-Z0-9]{3}");
         
         if (Regex.IsMatch(driversLicense, licenseBuilder.ToString()))
         {
