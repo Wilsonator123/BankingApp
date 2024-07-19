@@ -68,7 +68,7 @@ namespace BankingApp
         private static Random _random = new Random();
 
         // Generate a ten digit account Number for a new account
-        public static int GenerateAccountNumber()
+        public static string GenerateAccountNumber()
         {
             // create a string of ten numbers
             StringBuilder accountNumber = new(10);
@@ -78,16 +78,16 @@ namespace BankingApp
                 accountNumber.Append(_random.Next(0, 10));
             }
             
-            // convert accountNumber to an integer
-            int accountNo = int.Parse(accountNumber.ToString());
-            return accountNo;
+            // convert accountNumber back to string
+            
+            return accountNumber.ToString();
         }
 
         public bool AddPersonalAccount( decimal initialBalance)
         {
             // Create new personal account
             string name = $"{_firstName} {_lastName}";
-            int accountNumber = GenerateAccountNumber();
+            string accountNumber = GenerateAccountNumber();
             PersonalAccount personal = new PersonalAccount(name, accountNumber, initialBalance, DateTime.Now.ToString(), initialBalance);
             _personalAccounts.Add(personal);
             return true;
