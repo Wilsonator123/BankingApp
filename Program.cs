@@ -18,20 +18,30 @@ public class Program
         //businessAccount.DisplayBalance();
         //businessAccount.DisplayAccountTransactions();
 
+        // ===============================
+        // BANK !!!!
+        Bank bank = new Bank();
 
-        // // Uncomment this to test the data parser
-        //string workingDirectory = Environment.CurrentDirectory;
-        //string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-
-        //var businessAccounts = Data.ReadAccountFromCSV(projectDirectory + "/Temp/BusinessSampleData.csv", "Business");
-
-        //foreach (var account in businessAccounts)
+        //foreach (var account in bank.BusinessAccounts)
         //{
         //    account.DisplayAccountInformation();
         //    Console.WriteLine("");
         //}
+        //foreach (var account in bank.PersonalAccounts)
+        //{
 
-        //Data.StoreDataAsCSV(businessAccounts);
+        //    account.DisplayAccountInformation();
+        //    Console.WriteLine("");
+        //}
+        //foreach (var account in bank.ISAAccounts)
+        //{
+
+        //    account.DisplayAccountInformation();
+        //    Console.WriteLine("");
+        //}
+        // ===============================
+
+
 
         // Example of Transaction instantiation:
         //string dateString = "12/07/2012";

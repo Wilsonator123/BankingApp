@@ -1,13 +1,22 @@
-using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-using System.Security.Principal;
-using System.Text;
-using System.Windows.Markup;
 
 namespace BankingApp;
 
 public class Data
 {
+    // The first time we intialise the account object,
+    // we will read from the template data provided inside the temp folder
+
+    public static List<Account> InitAccountsFromTemp(string fileType)
+    {
+        string workingDirectory = Environment.CurrentDirectory;
+        string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+
+        var initialAccounts = Data.ReadAccountFromCSV(projectDirectory + $"/Temp/{fileType}SampleData.csv", fileType);
+
+        return initialAccounts;
+    }
+
     /// <summary>
     /// (Should be able to) Read and convert files in csv format storing
     /// bank account information into a a list of dictionaries
@@ -24,8 +33,10 @@ public class Data
     /// list of key-value pairs where each key is a account attribute name,
     /// and the value is the attribute value 
     /// </returns>
+    /// 
     public static List<Account> ReadAccountFromCSV(string filePath, string accountType)
     {
+
         List<Account> accountList = new();
         string[] attributes = [];
 
@@ -56,7 +67,7 @@ public class Data
                     switch (accountType)
                     {
                         case "Personal":
-                            throw new NotImplementedException();
+                            newAccount = GeneratePersonalAccountObj(accountInfo);
                             break;
 
                         case "Business":
@@ -64,11 +75,12 @@ public class Data
                             break;
 
                         case "ISA":
-                            throw new NotImplementedException();
+                            newAccount = GenerateISAAccountObj(accountInfo);
+
                             break;
 
                         default:
-                            throw new Exception("The account type is not recognised");
+                            throw new Exception(@"The account type is not recognised, it must either 'Personal', 'Business', 'ISA'");
                     }
                     accountList.Add(newAccount);
                 }
@@ -78,10 +90,45 @@ public class Data
         }
         catch (Exception e)
         {
-            Console.WriteLine("The file could not be read:");
+            Console.WriteLine("The file does not exist or could not be read:");
             Console.WriteLine(e.Message);
         }
         return accountList;
+    }
+
+    private static ISAAccount GenerateISAAccountObj(Dictionary<string, string> accountInfo)
+    {
+        string accountName = accountInfo["AccountName"];
+        string accountNumber = accountInfo["AccountNumber"];
+        decimal accountBalance;
+        if (!decimal.TryParse(accountInfo["AccountBalance"], out accountBalance))
+        {
+            throw new Exception("Some acccount balances field in the csv are not valid");
+        }
+        string creationDate = accountInfo["CreationDate"];
+
+        ISAAccount newAccount = new(accountName, accountNumber, accountBalance, creationDate);
+        return newAccount;
+    }
+
+    private static PersonalAccount GeneratePersonalAccountObj(Dictionary<string, string> accountInfo)
+    {
+
+        string accountName = accountInfo["AccountName"];
+        string accountNumber = accountInfo["AccountNumber"];
+        decimal accountBalance;
+        if (!decimal.TryParse(accountInfo["AccountBalance"], out accountBalance))
+        {
+            throw new Exception("Some acccount balances field in the csv are not valid");
+        }
+        string creationDate = accountInfo["CreationDate"];
+        decimal initialDeposit;
+        if (!decimal.TryParse(accountInfo["InitialDeposit"], out initialDeposit))
+        {
+            throw new Exception("Some Initial Deposit field in the csv are not valid");
+        }
+        PersonalAccount newAccount = new(accountName, accountNumber, accountBalance, creationDate, initialDeposit);
+        return newAccount;
     }
 
     private static BusinessAccount GenerateBusinessAccountObj(Dictionary<string, string> accountInfo)
@@ -92,7 +139,7 @@ public class Data
 
         if (!decimal.TryParse(accountInfo["AccountBalance"], out accountBalance))
         {
-            throw new Exception("Account balance entered is not valid");
+            throw new Exception("Some Account Balance field in the csv are not valid");
         };
 
         string creationDate = accountInfo["CreationDate"];
@@ -101,22 +148,21 @@ public class Data
         BusinessType businessType;
         if (!BusinessType.TryParse(accountInfo["BusinessType"], out businessType))
         {
-            throw new Exception("Business type entered does not match");
+            throw new Exception("Some Business Type field in the csv are not valid");
         };
         string? debitCardNumber = accountInfo["DebitCardNumber"];
         string? creditCardNumber = accountInfo["CreditCardNumber"];
         decimal overdraftAmount;
         if (!decimal.TryParse(accountInfo["OverdraftAmount"], out overdraftAmount))
         {
-            throw new Exception("Overdraft amount entered is not valid");
+            throw new Exception("Some Overdraft Amount field in the csv are not valid");
 
         }
         string chequeBookId = accountInfo["ChequeBookId"];
         decimal loanRate;
         if (!decimal.TryParse(accountInfo["LoanRate"], out loanRate))
         {
-            throw new Exception("Loan rate entered in not valid");
-
+            throw new Exception("Some Loan Rate field in the csv are not valid");
         }
 
         BusinessAccount newAccount = new(accountName, accountNumber, accountBalance, creationDate, businessName, businessType, debitCardNumber, creditCardNumber, overdraftAmount, chequeBookId, loanRate);
@@ -130,40 +176,47 @@ public class Data
     // to store it,
     // it has been already encapsulated for you, all you have to supply is
     // the data you want to store as a list of Account objects
-    public static void StoreDataAsCSV(List<Account> accounts)
+
+    // Also it account types supplied here should be pure,
+    // in the sense that you should not mix personal with business etc.
+    public static void StoreDataAsCSV(List<Account> accounts, string accountType)
     {
         if (!Directory.Exists(Globals.LOCAL_DATA_PATH))
         {
             Directory.CreateDirectory(Globals.LOCAL_DATA_PATH);
         }
-        string fileName = "";
 
         // Clear the old data 
-        string[] accountTypes = ["PersonalAccount", "BusinessAccount", "ISSAcount"];
-        foreach (string accountType in accountTypes)
+
+        string oldFileLocation = GetAccountInfoLocation(accountType);
+        if (File.Exists(oldFileLocation))
         {
-            string oldFileLocation = Globals.LOCAL_DATA_PATH + accountType + ".csv";
-            if (File.Exists(oldFileLocation))
+            try
             {
                 File.Delete(oldFileLocation);
+
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("The csv file is already in use, close it and try again");
+                return;
             }
         }
 
+
         foreach (var account in accounts)
         {
-            if (account is PersonalAccount) fileName = "PersonalAccount";
-            if (account is BusinessAccount) fileName = "BusinessAccount";
-            if (account is ISAAccount) fileName = "ISAAccount";
 
-            string accountDataLocation = Globals.LOCAL_DATA_PATH + fileName + ".csv";
+
+            string accountDataLocation = GetAccountInfoLocation(accountType);
             // The file is rewritten every time the function is being called, so make sure all account info has been passed
             using (StreamWriter sr = new StreamWriter(accountDataLocation, true))
             {
                 // Start by writing the first line of the file as a list of attribute names
                 PropertyInfo[] props = null;
-                if (fileName == "PersonalAccount") props = typeof(PersonalAccount).GetProperties();
-                else if (fileName == "BusinessAccount") props = typeof(BusinessAccount).GetProperties();
-                else if (fileName == "ISAAccount") props = typeof(ISAAccount).GetProperties();
+                if (accountType == "Personal") props = typeof(PersonalAccount).GetProperties();
+                else if (accountType == "Business") props = typeof(BusinessAccount).GetProperties();
+                else if (accountType == "ISA") props = typeof(ISAAccount).GetProperties();
 
                 if (new FileInfo(accountDataLocation).Length == 0)
                 {
@@ -183,6 +236,11 @@ public class Data
                 sr.WriteLine(String.Join(',', valueNames));
             }
         }
+    }
+
+    public static string GetAccountInfoLocation(string accountType)
+    {
+        return Globals.LOCAL_DATA_PATH + accountType + "Account" + ".csv";
     }
 
 }

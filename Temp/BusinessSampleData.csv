@@ -1,4 +1,11 @@
-AccountName, AccountNumber, AccountBalance, CreationDate, BusinessName, BusinessType, DebitCardNumber, CreditCardNumber, OverdraftAmount, ChequeBookId, LoanRate
-MyBusinessAccount1, 12123,    1000, 17-07-2024, Warner Bros, Partnership, null, 1234512, 1000, #1234, 4.5
-MyBusinessAccount2,12121311, 2421, 17-01-2024, Barner Bros, Partnership, 2323213, 1234512, 1000, #1231, 2.5
-MyBusinessAccount2,12121311, 1231, 17-01-2024, Barner Bros, Partnership, 2323213, 1234512, 1000, #1231, 2.5
+AccountName,AccountNumber,AccountBalance,CreationDate,BusinessName,BusinessType,DebitCardNumber,CreditCardNumber,OverdraftAmount,ChequeBookId,LoanRate
+MyBusinessAccount1,12123,1000,17-07-2024,Warner Bros,Partnership,,1234512,1000,#1234,4.5
+MyBusinessAccount2,12121311,1231,17-01-2024,Barner Bros,Partnership,2323213,1234512,1000,#1231,2.5
+MyBusinessAccount3,654321,3000,01-05-2023,Pixar,LimitedCompany,5678901,9876543,2000,#4321,3.0
+MyBusinessAccount4,987654,1500,23-03-2024,Universal Studios,SoleTrader,3456789,8765432,1500,#5678,3.5
+MyBusinessAccount5,123456,2750,11-11-2023,Paramount Pictures,LimitedCompany,2345678,7654321,1750,#6789,4.0
+MyBusinessAccount6,789012,1980,19-08-2024,Lionsgate,LimitedCompany,4567890,6543210,1980,#7890,2.8
+MyBusinessAccount7,345678,5200,21-06-2023,New Line Cinema,Partnership,6789012,5432109,2500,#8901,3.2
+MyBusinessAccount8,234567,4100,30-04-2024,Columbia Pictures,SoleTrader,7890123,4321098,3000,#9012,3.7
+MyBusinessAccount9,876543,3200,15-02-2024,20th Century Fox,LimitedCompany,8901234,3210987,2250,#0123,2.9
+MyBusinessAccount10,987654,2700,27-09-2023,MGM Studios,Partnership,9012345,2109876,2700,#1230,3.1
