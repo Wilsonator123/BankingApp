@@ -63,7 +63,7 @@ namespace BankingApp
                               Reference: {Reference}
                               Amount: {Amount}
                               Interval: {Interval}
-                              Next Payment Date: {NextPaymentDate}
+                              Next Payment Date: {DateHelper.DateToString(GetNextPaymentDate())}
                               """);
         }
 
@@ -127,6 +127,9 @@ namespace BankingApp
                     totalAmountPaid = numberOfIntervals * _amount;
 
                     break;
+
+                default:
+                    throw new ArgumentException("Not a valid interval type");
             }
 
 
