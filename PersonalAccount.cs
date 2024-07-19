@@ -13,17 +13,19 @@ namespace BankingApp
 
         public decimal InitialDeposit { get => _initialDeposit; set => _initialDeposit = value; }
 
-        public void ChargesIncurred()
+        public bool ChargesIncurred()
         {
             if (AccountBalance < 0)
             {
                 AccountBalance += -1;
                 Console.WriteLine($"You have incurred a charge on your account of {AccountBalance}");
+                return true;
             }
 
             else
             {
                 Console.WriteLine("No charges incurred as your account balance is non-negative.");
+                return false;
             }
         }
 
