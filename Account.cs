@@ -60,8 +60,13 @@ public abstract class Account
         return true;
     }
 
-    public void CreateStandingOrder(string payee, string reference, decimal amount, string interval)
+    public StandingOrder CreateStandingOrder(string payee, string reference, decimal amount, string interval, DateTime date = default)
     {
+        if (date == default)
+        {
+            date = DateTime.Now;
+        }
+
         switch (interval.ToUpper())
         {
 
@@ -86,21 +91,64 @@ public abstract class Account
 
         }
 
-        Transactions.Add(new StandingOrder(payee, reference, amount, interval));
-
+        StandingOrder so = new StandingOrder(payee, reference, amount, interval, date);
+        Transactions.Add(so);
+        return so;
     }
 
-    public void DisplayStandingOrders()
+    public bool RemoveStandingOrder(string reference)
+    {
+        var standingOrders = Transactions.OfType<StandingOrder>().ToList();
+        StandingOrder? so = standingOrders.Find(s => s.Reference == reference);
+        if (so != null)
+        {
+            Transactions.Remove(so);
+            return true;
+        }
+
+        Console.WriteLine("There is no standing order with the reference: " + reference);
+        return false;
+    }
+
+
+
+    public bool DisplayStandingOrders()
     {
         var standingOrders = Transactions.OfType<StandingOrder>().ToList();
 
-        foreach (var standingOrder in standingOrders)
+        if (standingOrders.Count > 0)
         {
-            standingOrder.ShowDetails();
-            Console.WriteLine("");
-            standingOrder.DisplayDetails();
+            foreach (var standingOrder in standingOrders)
+            {
+                standingOrder.ShowDetails();
+                Console.WriteLine("");
+                standingOrder.DisplayDetails();
+                Console.WriteLine("");
+            }
+
+            return true;
         }
+
+        Console.WriteLine("There are no standing orders");
+        return false;
     }
+
+    public StandingOrder FindStandingOrderByReference(string reference)
+    {
+        var standingOrders = Transactions.OfType<StandingOrder>().ToList();
+        StandingOrder? so = standingOrders.Find(s => s.Reference == reference);
+        if (so != null)
+        {
+            so.ShowDetails();
+            Console.WriteLine();
+            so.DisplayDetails();
+            return so;
+        }
+        Console.WriteLine("There is no standing order with the reference: " + reference);
+        return null;
+    }
+
+    
 
 
     public void DisplayAccountTransactions()
