@@ -22,9 +22,9 @@ public class BusinessAccount : Account
 
     public BusinessType BusinessType => _businessType;
 
-    public double? DebitCardNumber => _debitCardNumber;
+    public string? DebitCardNumber => _debitCardNumber;
 
-    public double? CreditCardNumber => _creditCardNumber;
+    public string? CreditCardNumber => _creditCardNumber;
 
     public decimal OverdraftAmount => _overdraftAmount;
 
@@ -44,8 +44,8 @@ public class BusinessAccount : Account
 
     // The account holders will be issued debit/credit cards
     // and may also receive an overdraft facility.
-    private double? _debitCardNumber;
-    private double? _creditCardNumber;
+    private string? _debitCardNumber;
+    private string? _creditCardNumber;
 
     private decimal _overdraftAmount;
 
@@ -54,11 +54,11 @@ public class BusinessAccount : Account
 
     // Other benefits include international trading and access to loans.
     private decimal _loanRate;
-    
-    public BusinessAccount(string accountName, int accountNumber, decimal accountBalance, string creationDate,
-        string businessName, BusinessType businessType, double? debitCardNumber, double? creditCardNumber,
+
+    public BusinessAccount(string accountName, string accountNumber, decimal accountBalance,string creationDate,
+        string businessName, BusinessType businessType, string? debitCardNumber, string? creditCardNumber,
         decimal overdraftAmount, string chequeBookId, decimal loanRate) : base(accountName, accountNumber,
-        accountBalance, creationDate)
+        accountBalance, accountType: "business", creationDate)
     {
         _businessName = businessName;
         _businessType = businessType;

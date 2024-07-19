@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BankingApp
 {
-    internal class Customer
+    public class Customer
     {
         private readonly Guid _id;
         private readonly string _firstName;

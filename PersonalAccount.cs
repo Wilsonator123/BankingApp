@@ -4,8 +4,8 @@ namespace BankingApp
     {
         private decimal _initialDeposit = 0m;
 
-        public PersonalAccount(string accountName, int accountNumber, decimal accountBalance, string creationDate, decimal initialDeposit) :
-        base(accountName, accountNumber, accountBalance, creationDate)
+        public PersonalAccount(string accountName, string accountNumber, decimal accountBalance, string creationDate, decimal initialDeposit) :
+        base(accountName, accountNumber, accountBalance, accountType: "personal", creationDate)
         {
             _initialDeposit = initialDeposit;
         }
