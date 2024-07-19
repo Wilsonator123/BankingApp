@@ -30,8 +30,16 @@ public abstract class Account
 
     public virtual bool Deposit(decimal amount)
     {
+        if (amount <= 0)
+        {
+            Console.WriteLine("Cannot deposit less than 0");
+            return false;
+        }
+
         AccountBalance += amount;
         Transactions.Add(new Transaction("deposit", amount));
+        Console.WriteLine($"Deposited: {amount:C2}");
+
         return true;
     }
 
