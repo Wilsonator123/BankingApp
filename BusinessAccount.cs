@@ -55,10 +55,10 @@ public class BusinessAccount : Account
     // Other benefits include international trading and access to loans.
     private decimal _loanRate;
 
-    public BusinessAccount(string accountName, string accountNumber, decimal accountBalance, string creationDate,
+    public BusinessAccount(string accountName, string accountNumber, decimal accountBalance,string creationDate,
         string businessName, BusinessType businessType, string? debitCardNumber, string? creditCardNumber,
         decimal overdraftAmount, string chequeBookId, decimal loanRate) : base(accountName, accountNumber,
-        accountBalance, creationDate)
+        accountBalance, accountType: "business", creationDate)
     {
         _businessName = businessName;
         _businessType = businessType;

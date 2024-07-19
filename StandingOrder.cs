@@ -2,14 +2,14 @@
 {
     public class StandingOrder : Transaction
     {
-        // could throw exceptions on null arguments
-        public string Payee { get; set; }
 
-        public string Reference { get; set; }
+        private string _payee;
 
-        public decimal Amount { get; set; }
+        private string _reference;
+
+        private decimal _amount;
         // weekly, monthly, etc.
-        public string Interval { get; set; }
+        private string _interval;
 
         public StandingOrder(string payee, string reference, decimal amount, string interval) 
             : base("Standing Order") 
@@ -22,6 +22,15 @@
             Interval = interval;
 
         }
+
+        // could throw exceptions on null arguments
+        public string Payee { get => _payee; set => _payee = value; }
+
+        public string Reference { get => _reference; set => _reference = value; }
+
+        public decimal Amount { get => _amount; set => _amount = value; }
+        // weekly, monthly, etc.
+        public string Interval { get => _interval; set => _interval = value; }
 
 
         public void DisplayDetails()
