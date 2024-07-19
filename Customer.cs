@@ -44,7 +44,7 @@ public class Customer
                 _firstName = firstName;
                 _lastName = lastName;
                 // TODO : We should validate the IDs presented (basic regex will do)
-                _dateOfBirth = DateTime.ParseExact(dateOfBirth, "dd/MM/yyyy", new CultureInfo("en-GB"));
+                _dateOfBirth = DateHelper.StringToDate(dateOfBirth);
             }
             catch (FormatException ex)
             {

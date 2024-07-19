@@ -78,11 +78,11 @@ public class Program
 
         Console.Write("Enter date of birth (dd/mm/yyy): ");
         string? dateOfBirth = Console.ReadLine();
-        while (!Regex.IsMatch(dateOfBirth, @"^[0-3][0-9]\/[0-1][1-9]\/(?:19|20)[0-9][0-9]"))
+        while (!DateHelper.IsDateFormat(dateOfBirth))
         {
             Console.WriteLine("Invalid Format (dd/mm/yyyy)");
             Console.Write("Enter a valid date: ");
-            Console.ReadLine();
+            dateOfBirth = Console.ReadLine();
         }
 
 
@@ -107,16 +107,28 @@ public class Program
 
         int photoIdType = int.Parse(photoTypeInput);
         Console.Clear();
-        Console.WriteLine($"You have chosen {(photoTypeInput == "1" ? "UK Drivers License" : "UK Passport")}");
+        Console.WriteLine($"You have chosen {(photoIdType == 1 ? "UK Drivers License" : "UK Passport")}");
         Console.Write("Please enter your ID Number: ");
         string? photoId = Console.ReadLine();
-        while (!Validator.ValidateDriversLicense(cus, photoId))
+        if (photoIdType == 1)
         {
-            Console.WriteLine("Invalid Drivers License");
-            Console.Write("Please enter a valid ID Number: ");
-            photoId = Console.ReadLine();
+            while (!Validator.ValidateDriversLicense(cus, photoId))
+            {
+                Console.WriteLine("Invalid Drivers License");
+                Console.Write("Please enter a valid ID Number: ");
+                photoId = Console.ReadLine();
+            }
         }
-        
+        else
+        {
+            while (photoId.Length < 9)
+            {
+                Console.WriteLine("Invalid Passport number");
+                Console.Write("Please enter a valid passport number: ");
+                photoId = Console.ReadLine();
+            }
+        }
+
         cus.AddPhotoId(photoIdType, photoId);
 
         Console.Write("Please enter your address ID: ");

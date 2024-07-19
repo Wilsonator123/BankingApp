@@ -11,7 +11,6 @@ public static class Validator
         StringBuilder licenseBuilder = new StringBuilder();
         if(driversLicense.Length != 16)
         {
-            Console.WriteLine("Invalid drivers license");
             return false;
         }
         string lastName; 
@@ -42,7 +41,6 @@ public static class Validator
         
         if (!Regex.IsMatch(driversLicense, licenseBuilder.ToString()))
         {
-            Console.WriteLine("Invalid drivers license");
             return false;
         }
 
