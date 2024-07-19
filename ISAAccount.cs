@@ -8,7 +8,7 @@ public class ISAAccount : Account
 
 
     public ISAAccount(string accountName, string accountNumber, decimal accountBalance, string creationDate)
-        : base(accountName, accountNumber, accountBalance, creationDate)
+        : base(accountName, accountNumber, accountBalance, accountType: "ISA",creationDate)
     { }
 
 
