@@ -22,7 +22,7 @@ public class Customer
         
         // Can have multiple personal accounts but one business / isa
         //TODO : Create Personal Account Class
-        private List<int> _personalAccounts = [];
+        private List<PersonalAccount> _personalAccounts = new();
 
         // TODO : Create Business Account Class (This type will be Business)
         private int? _businessAccounts = null;
@@ -66,7 +66,7 @@ public class Customer
         
         public string PhotoId { get => _photoId; set => _photoId = value; }
         public int AddressId { get => _addressId; set => _addressId = value; }
-        
+
         // DoB shouldn't change
         public DateTime DateOfBirth { get => _dateOfBirth; }
 
@@ -76,10 +76,32 @@ public class Customer
 
         public Guid Id => _id;
 
-        public bool AddPersonalAccount(int accountNumber)
+
+        private static Random _random = new Random();
+
+        // Generate a ten digit account Number for a new account
+        public static string GenerateAccountNumber()
         {
-            // TODO : Create new personal account 
-            _personalAccounts.Add(accountNumber);
+            // create a string of ten numbers
+            StringBuilder accountNumber = new(10);
+
+            for (int i = 0; i < 10; i++)
+            {
+                accountNumber.Append(_random.Next(0, 10));
+            }
+            
+            // convert accountNumber back to string
+            
+            return accountNumber.ToString();
+        }
+
+        public bool AddPersonalAccount( decimal initialBalance)
+        {
+            // Create new personal account
+            string name = $"{_firstName} {_lastName}";
+            string accountNumber = GenerateAccountNumber();
+            PersonalAccount personal = new PersonalAccount(name, accountNumber, initialBalance, DateTime.Now.ToString(), initialBalance);
+            _personalAccounts.Add(personal);
             return true;
         }
         private bool ValidateDateOfBirth(string date)
@@ -87,7 +109,7 @@ public class Customer
             // TODO : Take in a dd/mm/yyyy string and validate it
             return true;
         }
-        
+
         public override string ToString()
         {
             // TODO : Display all customer information
