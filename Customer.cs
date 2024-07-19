@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BankingApp;
 
-public enum IdType { Passport = 1, DriversLicense = 2, NationalId = 3 } 
+public enum IdType { Passport = 1, DriversLicense = 2, NationalId = 3 }
 
-    internal class Customer
+public class Customer
     {
         private readonly Guid _id;
         private readonly string _firstName;
@@ -35,7 +35,7 @@ public enum IdType { Passport = 1, DriversLicense = 2, NationalId = 3 }
         private string transactionPath;
 
 
-        public Customer(string firstName, string lastName, int photoIdType, string photoId, int addressId, string dateOfBirth)
+        public Customer(string firstName, string lastName, string dateOfBirth)
         {
             try
             {
@@ -44,15 +44,23 @@ public enum IdType { Passport = 1, DriversLicense = 2, NationalId = 3 }
                 _firstName = firstName;
                 _lastName = lastName;
                 // TODO : We should validate the IDs presented (basic regex will do)
-                _photoIdType = (IdType) photoIdType;
-                _photoId = photoId;
-                _addressId = addressId;
                 _dateOfBirth = DateTime.ParseExact(dateOfBirth, "dd/MM/yyyy", new CultureInfo("en-GB"));
             }
             catch (FormatException ex)
             {
                 Console.WriteLine("Invalid Date Format");
             }
+        }
+        
+        public void AddPhotoId(int photoIdType, string photoId)
+        {
+            _photoIdType = (IdType) photoIdType;
+            _photoId = photoId;
+        }
+        
+        public void AddAddressId(int addressId)
+        {
+            _addressId = addressId;
         }
 
         

@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using BankingApp;
 public class Program
 {
@@ -84,6 +85,10 @@ public class Program
             Console.ReadLine();
         }
 
+
+        Customer cus = new Customer(firstName, lastName, dateOfBirth);
+        Console.WriteLine(cus.ToString());
+        
         Console.Write("""
 
                       Please Enter Choose a Photo ID type
@@ -101,16 +106,21 @@ public class Program
         }
 
         int photoIdType = int.Parse(photoTypeInput);
-
+        Console.Clear();
         Console.WriteLine($"You have chosen {(photoTypeInput == "1" ? "UK Drivers License" : "UK Passport")}");
         Console.Write("Please enter your ID Number: ");
         string? photoId = Console.ReadLine();
+        while (!Validator.ValidateDriversLicense(cus, photoId))
+        {
+            Console.WriteLine("Invalid Drivers License");
+            Console.Write("Please enter a valid ID Number: ");
+            photoId = Console.ReadLine();
+        }
+        
+        cus.AddPhotoId(photoIdType, photoId);
 
         Console.Write("Please enter your address ID: ");
         string? addressId = Console.ReadLine();
-
-        Customer cus = new Customer(firstName, lastName, photoIdType, photoId, 100, dateOfBirth);
-        Console.WriteLine(cus.ToString());
     }
 
     public static void Main(){
