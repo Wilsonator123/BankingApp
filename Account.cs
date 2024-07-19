@@ -60,6 +60,49 @@ public abstract class Account
         return true;
     }
 
+    public void CreateStandingOrder(string payee, string reference, decimal amount, string interval)
+    {
+        switch (interval.ToUpper())
+        {
+
+            case "DAILY":
+                break;
+
+            case "WEEKLY":
+                break;
+
+            case "MONTHLY":
+                break;
+
+            case "QUARTERLY":
+                break;
+
+            case "YEARLY":
+                break;
+
+            default:
+                throw new ArgumentException("Not a valid interval type");
+
+
+        }
+
+        Transactions.Add(new StandingOrder(payee, reference, amount, interval));
+
+    }
+
+    public void DisplayStandingOrders()
+    {
+        var standingOrders = Transactions.OfType<StandingOrder>().ToList();
+
+        foreach (var standingOrder in standingOrders)
+        {
+            standingOrder.ShowDetails();
+            Console.WriteLine("");
+            standingOrder.DisplayDetails();
+        }
+    }
+
+
     public void DisplayAccountTransactions()
     {
         foreach (var transaction in Transactions)
