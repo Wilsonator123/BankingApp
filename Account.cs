@@ -60,7 +60,7 @@ public abstract class Account
         return true;
     }
 
-    public void CreateStandingOrder(string payee, string reference, decimal amount, string interval, DateTime date = default)
+    public StandingOrder CreateStandingOrder(string payee, string reference, decimal amount, string interval, DateTime date = default)
     {
         if (date == default)
         {
@@ -91,9 +91,26 @@ public abstract class Account
 
         }
 
-        Transactions.Add(new StandingOrder(payee, reference, amount, interval, date));
-
+        StandingOrder so = new StandingOrder(payee, reference, amount, interval, date);
+        Transactions.Add(so);
+        return so;
     }
+
+    public bool RemoveStandingOrder(string reference)
+    {
+        var standingOrders = Transactions.OfType<StandingOrder>().ToList();
+        StandingOrder? so = standingOrders.Find(s => s.Reference == reference);
+        if (so != null)
+        {
+            Transactions.Remove(so);
+            return true;
+        }
+
+        Console.WriteLine("There is no standing order with the reference: " + reference);
+        return false;
+    }
+
+
 
     public bool DisplayStandingOrders()
     {
