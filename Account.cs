@@ -1,11 +1,19 @@
+using System.ComponentModel.DataAnnotations;
 using BankingApp;
 
 public abstract class Account
 {
-
+    [Required]
     private string _accountName = "";
+
+    [Required]
+    [StringLength(10, MinimumLength = 10, ErrorMessage = "Account number must be 10 digits long.")]
+    [UniqueAccountNumber]
     private string _accountNumber = "";
+
+    [Range(0, double.MaxValue, ErrorMessage = "Account balance cannot be negative.")]
     private decimal _accountBalance = 0;
+    [Required]
     private string _creationDate = "";
     // transaction list could be initialised from a file
     private List<Transaction> _transactions = [];
