@@ -2,6 +2,7 @@ namespace BankingApp
 {
     public class PersonalAccount : Account
     {
+
         private decimal _initialDeposit = 0m;
 
         public PersonalAccount(string accountName, string accountNumber, decimal accountBalance, string creationDate, decimal initialDeposit) :
