@@ -110,19 +110,19 @@ namespace BankingApp
 
                     break;
                 case "MONTHLY":
-                    nextPaymentDate = creationDate.AddMonths(1);
+                    nextPaymentDate = creationDate.AddMonths(timeDifference.Days / 30 + 1);
                     numberOfIntervals = timeDifference.Days / 12;
                     totalAmountPaid = numberOfIntervals * _amount;
 
                     break;
                 case "QUARTERLY":
-                    nextPaymentDate = creationDate.AddMonths(3);
+                    nextPaymentDate = creationDate.AddMonths((timeDifference.Days / 90 + 1) * 3);
                     numberOfIntervals = timeDifference.Days / 4;
                     totalAmountPaid = numberOfIntervals * _amount;
 
                     break;
                 case "YEARLY":
-                    nextPaymentDate = creationDate.AddYears(1);
+                    nextPaymentDate = creationDate.AddYears(timeDifference.Days / 365 + 1);
                     numberOfIntervals = timeDifference.Days / 365;
                     totalAmountPaid = numberOfIntervals * _amount;
 

@@ -106,6 +106,7 @@ public abstract class Account
                 standingOrder.ShowDetails();
                 Console.WriteLine("");
                 standingOrder.DisplayDetails();
+                Console.WriteLine("");
             }
 
             return true;
