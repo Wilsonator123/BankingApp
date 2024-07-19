@@ -94,13 +94,22 @@ public abstract class Account
     {
         var standingOrders = Transactions.OfType<StandingOrder>().ToList();
 
-        foreach (var standingOrder in standingOrders)
+        if (standingOrders.Count > 0)
         {
-            standingOrder.ShowDetails();
-            Console.WriteLine("");
-            standingOrder.DisplayDetails();
+            foreach (var standingOrder in standingOrders)
+            {
+                standingOrder.ShowDetails();
+                Console.WriteLine("");
+                standingOrder.DisplayDetails();
+            }
+
+            return;
         }
+
+        Console.WriteLine("There are no standing orders");
     }
+
+    
 
 
     public void DisplayAccountTransactions()
