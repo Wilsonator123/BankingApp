@@ -64,16 +64,16 @@ public abstract class Account
 
             case "DAILY":
                 break;
-            
+
             case "WEEKLY":
                 break;
-            
+
             case "MONTHLY":
                 break;
-            
+
             case "QUARTERLY":
                 break;
-            
+
             case "YEARLY":
                 break;
 
@@ -87,6 +87,17 @@ public abstract class Account
 
     }
 
+    public void DisplayStandingOrders()
+    {
+        var standingOrders = Transactions.OfType<StandingOrder>().ToList();
+
+        foreach (var standingOrder in standingOrders)
+        {
+            standingOrder.ShowDetails();
+            Console.WriteLine("");
+            standingOrder.DisplayDetails();
+        }
+    }
 
 
     public void DisplayAccountTransactions()
