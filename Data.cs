@@ -1,4 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 using System.Security.Principal;
+using System.Text;
+using System.Windows.Markup;
 
 namespace BankingApp;
 
@@ -65,8 +69,6 @@ public class Data
 
                         default:
                             throw new Exception("The account type is not recognised");
-
-
                     }
                     accountList.Add(newAccount);
                 }
@@ -122,24 +124,65 @@ public class Data
         return newAccount;
     }
 
+    // A super user-friendly way to store account info
 
-    //// An example of how to do local data storage
-    //public static void StoreDataAsJson()
-    //{
+    // you don't even have to to specify path names on where you would like
+    // to store it,
+    // it has been already encapsulated for you, all you have to supply is
+    // the data you want to store as a list of Account objects
+    public static void StoreDataAsCSV(List<Account> accounts)
+    {
+        if (!Directory.Exists(Globals.LOCAL_DATA_PATH))
+        {
+            Directory.CreateDirectory(Globals.LOCAL_DATA_PATH);
+        }
+        string fileName = "";
 
-    //    Console.WriteLine(Globals.LOCAL_DATA_PATH);
-    //    if (!Directory.Exists(Globals.LOCAL_DATA_PATH))
-    //    {
-    //        Directory.CreateDirectory(Globals.LOCAL_DATA_PATH);
-    //    }
-    //    string businessAccountDataLocation = Globals.LOCAL_DATA_PATH + "BusinessAccount.csv";
+        // Clear the old data 
+        string[] accountTypes = ["PersonalAccount", "BusinessAccount", "ISSAcount"];
+        foreach (string accountType in accountTypes)
+        {
+            string oldFileLocation = Globals.LOCAL_DATA_PATH + accountType + ".csv";
+            if (File.Exists(oldFileLocation))
+            {
+                File.Delete(oldFileLocation);
+            }
+        }
 
-    //    using (StreamWriter sr = new StreamWriter(businessAccountDataLocation))
-    //    {
-    //        sr.WriteLine("AccountName, AccountNumber, AccountBalance, CreationDate, BusinessName, BusinessType, DebitCardNumber, CreditCardNumber, OverdraftAmount, ChequeBookId, LoanRate\r\nMyBusinessAccount1, 12123,    1000m, 17-07-2024, Warner Bros, BusinessType.Partnership, null, 1234512, 1000, #1234, 4.5m\r\nMyBusinessAccount2,12121311, 2421m, 17-01-2024, Barner Bros, BusinessType.Partnership, 2323213, 1234512, 1000, #1231, 2.5m\r\nMyBusinessAccount2,12121311, 1231m, 17-01-2024, Barner Bros, BusinessType.Partnership, 2323213, 1234512, 1000, #1231, 2.5m\r\n");
-    //    }
+        foreach (var account in accounts)
+        {
+            if (account is PersonalAccount) fileName = "PersonalAccount";
+            if (account is BusinessAccount) fileName = "BusinessAccount";
+            if (account is ISAAccount) fileName = "ISAAccount";
 
-    //    Console.WriteLine(businessAccountDataLocation);
-    //}
+            string accountDataLocation = Globals.LOCAL_DATA_PATH + fileName + ".csv";
+            // The file is rewritten every time the function is being called, so make sure all account info has been passed
+            using (StreamWriter sr = new StreamWriter(accountDataLocation, true))
+            {
+                // Start by writing the first line of the file as a list of attribute names
+                PropertyInfo[] props = null;
+                if (fileName == "PersonalAccount") props = typeof(PersonalAccount).GetProperties();
+                else if (fileName == "BusinessAccount") props = typeof(BusinessAccount).GetProperties();
+                else if (fileName == "ISAAccount") props = typeof(ISAAccount).GetProperties();
+
+                if (new FileInfo(accountDataLocation).Length == 0)
+                {
+                    List<string> propNames = new();
+                    foreach (PropertyInfo? prop in props)
+                    {
+                        propNames.Add(prop.Name);
+                    }
+                    sr.WriteLine(String.Join(',', propNames));
+                }
+
+                List<string> valueNames = new();
+                foreach (PropertyInfo? prop in props)
+                {
+                    valueNames.Add(prop.GetValue(account, null).ToString());
+                }
+                sr.WriteLine(String.Join(',', valueNames));
+            }
+        }
+    }
 
 }

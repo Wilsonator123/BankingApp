@@ -19,16 +19,18 @@ public class Program
 
 
         // // Uncomment this to test the data parser
-        string workingDirectory = Environment.CurrentDirectory;
-        string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+        //string workingDirectory = Environment.CurrentDirectory;
+        //string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
 
-        var businessAccounts = Data.ReadAccountFromCSV(projectDirectory + "/Temp/BusinessSampleData.csv", "Business");
+        //var businessAccounts = Data.ReadAccountFromCSV(projectDirectory + "/Temp/BusinessSampleData.csv", "Business");
 
-        foreach (var account in businessAccounts)
-        {
-            account.DisplayAccountInformation();
-            Console.WriteLine("");
-        }
+        //foreach (var account in businessAccounts)
+        //{
+        //    account.DisplayAccountInformation();
+        //    Console.WriteLine("");
+        //}
+
+        //Data.StoreDataAsCSV(businessAccounts);
 
         // Example of Transaction instantiation:
         //string dateString = "12/07/2012";
