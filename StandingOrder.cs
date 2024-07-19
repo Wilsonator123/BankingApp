@@ -24,6 +24,23 @@ namespace BankingApp
             Reference = reference;
             Amount = amount;
             Interval = interval;
+            NextPaymentDate = GetNextPaymentDate();
+
+
+        }
+
+        public StandingOrder(string payee, string reference, decimal amount, string interval, DateTime date)
+            : base("Standing Order", date)
+
+        {
+            // should check if date is valid (not greater than current)
+            // could throw exceptions on null arguments
+            Payee = payee;
+            Reference = reference;
+            Amount = amount;
+            Interval = interval;
+            NextPaymentDate = GetNextPaymentDate();
+
 
         }
 
@@ -35,7 +52,7 @@ namespace BankingApp
         public decimal Amount { get => _amount; set => _amount = value; }
         // weekly, monthly, etc.
         public string Interval { get => _interval; set => _interval = value; }
-        public DateTime NextPaymentDate { get => _nextPaymentDate; set => _nextPaymentDate = GetNextPaymentDate(); }
+        public DateTime NextPaymentDate { get => _nextPaymentDate; set => _nextPaymentDate = value; }
 
 
         public void DisplayDetails()
@@ -46,6 +63,7 @@ namespace BankingApp
                               Reference: {Reference}
                               Amount: {Amount}
                               Interval: {Interval}
+                              Next Payment Date: {NextPaymentDate}
                               """);
         }
 
