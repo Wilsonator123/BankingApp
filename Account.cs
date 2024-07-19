@@ -90,7 +90,7 @@ public abstract class Account
 
     }
 
-    public void DisplayStandingOrders()
+    public bool DisplayStandingOrders()
     {
         var standingOrders = Transactions.OfType<StandingOrder>().ToList();
 
@@ -103,10 +103,26 @@ public abstract class Account
                 standingOrder.DisplayDetails();
             }
 
-            return;
+            return true;
         }
 
         Console.WriteLine("There are no standing orders");
+        return false;
+    }
+
+    public bool FindStandingOrderByReference(string reference)
+    {
+        var standingOrders = Transactions.OfType<StandingOrder>().ToList();
+        StandingOrder? so = standingOrders.Find(s => s.Reference == reference);
+        if (so != null)
+        {
+            so.ShowDetails();
+            Console.WriteLine();
+            so.DisplayDetails();
+            return true;
+        }
+        Console.WriteLine("There is no standing order with the reference: " + reference);
+        return false;
     }
 
     
